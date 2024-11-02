@@ -1,51 +1,42 @@
 import { useState } from "react"
+import { FormEvent } from "react";
+import TodoItem from "./TodoItem.tsx";
 // @deno-types="@types/react"
 // @deno-types="@types/react-dom/client"
 type Props = {}
-
-    type Task ={
-        id : number,
-        name : string
-
-
-    }
 
 
 export default function Todo({}: Props) {
   
     const [todo , setTodo] = useState("")
-    const [task , setTask] = useState(["task1", "task2"])
 
 
-    function handlesubmit(e: React.FormEvent<HTMLFormElement>) {
+    const[todos , setTodos] = useState([])
+    function handlesubmit(e: FormEvent<HTMLFormElement>) {
 
         e.preventDefault()
 
+        setTodos([...todos , todo])
 
-        setTask([...task , todo])
-        console.log(task)
-
+        setTodo("")
+            
     }
-  
+
     return (
     <div>
         
-
-<form>
+<form onSubmit={handlesubmit}>
 
     <input onChange={e => setTodo(e.target.value)}  value ={todo}type="text"/>
 
 
-    <button onClick={e =>{handlesubmit(e)} }>ADD TASK</button>
+    <button>ADD sTASK</button>
 </form>
 
-<ol>
-       {task.map((e,i)=> <li key={i}>{e}</li>)
-       }
-
-</ol>
-
+<h1>{todos.map((item : string, i :number ) => <TodoItem item={item} key={i} />)}</h1>
 
     </div>
   )
 };
+
+// to return jsx use ()
