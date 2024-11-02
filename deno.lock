@@ -8,6 +8,7 @@
     "npm:@vitejs/plugin-react@^4.3.2": "4.3.2_vite@5.4.9__@types+node@22.5.4_@babel+core@7.25.8_@types+node@22.5.4",
     "npm:react-dom@^18.3.1": "18.3.1_react@18.3.1",
     "npm:react@^18.3.1": "18.3.1",
+    "npm:vite@*": "5.4.9_@types+node@22.5.4",
     "npm:vite@^5.4.8": "5.4.9_@types+node@22.5.4"
   },
   "npm": {
@@ -601,5 +602,16 @@
     "yallist@3.1.1": {
       "integrity": "sha512-a4UGQaWPH59mOXUYnAG2ewncQS4i4F43Tv3JoAM+s2VDAmS9NsK8GpDMLrCHPksFT7h3K6TOoUNn2pb7RoXx4g=="
     }
+  },
+  "workspace": {
+    "dependencies": [
+      "npm:@deno/vite-plugin@1",
+      "npm:@types/react-dom@^18.3.1",
+      "npm:@types/react@^18.3.1",
+      "npm:@vitejs/plugin-react@^4.3.2",
+      "npm:react-dom@^18.3.1",
+      "npm:react@^18.3.1",
+      "npm:vite@^5.4.8"
+    ]
   }
 }

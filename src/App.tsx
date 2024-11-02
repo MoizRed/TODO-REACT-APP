@@ -1,16 +1,15 @@
-// @deno-types="@types/react"
-import { useState } from 'react'
+import Todo from "./components/Todo.tsx";
 
-// @deno-types="@types/react-dom/client"
+type Props = {}
 
-function App() {
-
-
+export default function App({}: Props) {
   return (
-  <>
-  <h1>hello hahffahaha</h1>
+    <>
+    
+      <Todo/>
+    
+    
+    
     </>
   )
-}
-
-export default App
+};
