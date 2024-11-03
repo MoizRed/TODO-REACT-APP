@@ -1,7 +1,5 @@
-type Props = {item : string | number}
+type Props = { item: string | number };
 
-export default function itemItem({item}: Props) {
-  return (
-    <div>{item}</div>
-  )
-};
+export default function itemItem({ item }: Props) {
+  return <div>{item}</div>;
+}
