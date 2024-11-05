@@ -1,29 +1,35 @@
-import { useState } from "react";
-import Form from "../components/Form.tsx";
+import Todolist from "../components/Todolist.tsx"
 import { FormEvent } from "react";
-import TodoItem from "./TodoItem.tsx";
-// @deno-types="@types/react"
+import { useState } from "react";
+
+// @deno-types="@types/react" 
 // @deno-types="@types/react-dom/client"
-type Props = {};
+type Props = {
 
-export default function Todo({}: Props) {
-  const [todo, setTodo] = useState("");
 
-  const [todos, setTodos] = useState([]);
- 
+};
 
+export default function Todo() {
+
+    const [todo, setTodo] = useState("");
+    const [todos, setTodos] = useState([]);
+    function handlechange(e: FormEvent) {
+      e.preventDefault();
+      setTodo("");
+      setTodos([...todos, todo]);
+    }
   return (
-    <div>
-     <Form/>
-      <h1>
-        {todos.map((item: string, i: number) => (
-          <TodoItem
-            item={item}
-            key={i}
-          />
-        ))}
-      </h1>
-    </div>
+    <>
+      <form>
+    <input
+      onChange={(e) => setTodo(e.target.value)}
+      type="text"
+      value={todo}
+    />
+    <button type="submit" onClick={(e) => handlechange(e)}>Submit</button>
+  </form>
+  <Todolist todos={todos}/>
+    </>
   );
 }
 
