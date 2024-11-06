@@ -1,3 +1,7 @@
+import Todoitem from "./Todoitem.tsx";
+
+
+
 type props = {
   todos: string[];
 };
@@ -5,7 +9,9 @@ type props = {
 export default function Todolist({ todos }: props) {
   return (
     <>
-      
+    <ol>
+    <Todoitem todos={todos} />
+    </ol>
     </>
   );
 }

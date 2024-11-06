@@ -1,5 +1,8 @@
 import { FormEvent } from "react";
 import { useState } from "react";
+
+import {styles} from "./form.module.css"
+
 type props = {
 todos: string[],
 setTodos: React.Dispatch<React.SetStateAction<string[]>>;

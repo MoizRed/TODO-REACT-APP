@@ -1,7 +1,13 @@
-import React from 'react'
+type props ={
+    todos : string[]
 
-export default function Todoitem() {
+}
+export default function Todoitem({todos}: props) {
   return (
-    <div>Todoitem</div>
+        <>
+    {todos.map((e: any, i: number) => <li key={i}>{i + 1} - {e}</li>)}
+        
+    </>
+    
   )
 }
