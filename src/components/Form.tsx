@@ -1,12 +1,29 @@
 import { FormEvent } from "react";
 import { useState } from "react";
+type props = {
+todos: string[],
+setTodos: React.Dispatch<React.SetStateAction<string[]>>;
 
-export default function Form() {
+}
 
+export default function Form({todos,setTodos} : props) {
+
+  const [todo, setTodo] = useState("");
   
+  function handlechange(e: FormEvent) {
+    e.preventDefault();
+    setTodo("");
+    setTodos([...todos, todo]);
+  }
   
-   
-  return (<></>
-  
+return(
+  <form>
+  <input
+    onChange={(e) => setTodo(e.target.value)}
+    type="text"
+    value={todo}
+  />
+  <button type="submit" onClick={(e) => handlechange(e)}>Submit</button>
+</form>
   )
 }
