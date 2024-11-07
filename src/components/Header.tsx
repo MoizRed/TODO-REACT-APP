@@ -6,7 +6,7 @@ const ___Header = {
   color: "white",
   backgroundColor: "rgb(46, 46, 46)",
   padding: "10px 0",
-};  
+};
 
 type props = {};
 export default function Header({}: props) {

@@ -1,32 +1,76 @@
 import { FormEvent } from "react";
 import { useState } from "react";
 
-import {styles} from "./form.module.css"
+const styles = {
+  todoform: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: "1rem",
+    padding: "1rem",
+    borderRadius: "0.5rem",
+    boxShadow: "0 0 10px rgba(0,0,0,0.1)",
+    backgroundColor: "#f5f5f5",
+    color: "#333",
+  },
 
+  input: {
+    padding: "0.5rem",
+    border: "1px solid #ccc",
+    borderRadius: "0.25rem",
+    width: "100%",
+    maxWidth: "300px",
+    fontSize: "1rem",
+    height: "2.5rem",
+  },
+
+  button: {
+    padding: "0.5rem 1rem",
+    border: "none",
+    borderRadius: "0.25rem",
+    backgroundColor: "#007bff",
+    color: "#fff",
+    cursor: "pointer",
+    fontSize: "1rem",
+    transition: "background-color 0.3s",
+  },
+};
 type props = {
-todos: string[],
-setTodos: React.Dispatch<React.SetStateAction<string[]>>;
+  todos: string[];
+  setTodos: React.Dispatch<React.SetStateAction<string[]>>;
+};
 
-}
-
-export default function Form({todos,setTodos} : props) {
-
+export default function Form({ todos, setTodos }: props) {
+  const [warning, setwarn] = useState("");
   const [todo, setTodo] = useState("");
-  
+
   function handlechange(e: FormEvent) {
     e.preventDefault();
+
+    if (todo === "") {
+      setwarn("Please enter a todo");
+      return; //stops the rest of the code lol because it returns
+    } else setwarn("");
     setTodo("");
     setTodos([...todos, todo]);
   }
-  
-return(
-  <form>
-  <input
-    onChange={(e) => setTodo(e.target.value)}
-    type="text"
-    value={todo}
-  />
-  <button type="submit" onClick={(e) => handlechange(e)}>Submit</button>
-</form>
-  )
+
+  return (
+    <form style={styles.todoform}>
+      <input
+        style={styles.input}
+        onChange={(e) => setTodo(e.target.value)}
+        type="text"
+        value={todo}
+      />
+      <button
+        style={styles.button}
+        type="submit"
+        onClick={(e) => handlechange(e)}
+      >
+        Submit
+      </button>
+      <p style={{ color: "red" }}>{warning}</p>
+    </form>
+  );
 }
