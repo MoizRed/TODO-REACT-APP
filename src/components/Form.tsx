@@ -40,18 +40,27 @@ type props = {
   setTodos: React.Dispatch<React.SetStateAction<string[]>>;
 };
 
+type itemobj ={
+  name : string,
+  done : boolean
+
+}
+
+const item : itemobj = { name: "", done: false }
+
+
 export default function Form({ todos, setTodos }: props) {
   const [warning, setwarn] = useState("");
-  const [todo, setTodo] = useState("");
+  const [todo, setTodo] = useState(item);
 
   function handlechange(e: FormEvent) {
     e.preventDefault();
 
-    if (todo === "") {
+    if (todo.name === "") {
       setwarn("Please enter a todo");
       return; //stops the rest of the code lol because it returns
     } else setwarn("");
-    setTodo("");
+    setTodo({ name: "", done: false });
     setTodos([...todos, todo]);
   }
 
@@ -59,9 +68,9 @@ export default function Form({ todos, setTodos }: props) {
     <form style={styles.todoform}>
       <input
         style={styles.input}
-        onChange={(e) => setTodo(e.target.value)}
+        onChange={(e) => setTodo({ name: e.target.value, done: false })}
         type="text"
-        value={todo}
+        value={todo.name}
       />
       <button
         style={styles.button}
