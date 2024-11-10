@@ -1,6 +1,8 @@
 import deno from "@deno/vite-plugin";
 import { useState } from "react";
 import { string } from "../../../../../.cache/deno/npm/registry.npmjs.org/@types/prop-types/15.7.13/index.d.ts";
+import { isIgnored } from "../../../../../.cache/deno/npm/registry.npmjs.org/@jridgewell/trace-mapping/0.3.25/dist/types/trace-mapping.d.ts";
+import { todo } from "node:test";
 
 type props = {  
   item : {
@@ -8,11 +10,15 @@ type props = {
     name :string
     done : boolean
   }
-  todos: string[];
-  setTodos: React.Dispatch<React.SetStateAction<string[]>>;
+  todos: {name: string; done: boolean}[]; //this is an array of object i want you to give a valid type for it 
+  setTodos: React.Dispatch<React.SetStateAction<{name: string; done: boolean}[]>>;
   
 };
+type item = {
 
+  name :string
+  done : boolean
+}
 
 
 const list = {
@@ -26,19 +32,17 @@ const list = {
 export default function Todoitem({ item, todos, setTodos }: props) {
 
   const [textDecoration , settextDecoration] = useState("none")
-  function handleDelete(item: string) {
+  function handleDelete(item: item) {
     console.log("deleted");
     setTodos(todos.filter((e) => e.name != item.name));
   }
-function handleclick(item){
+function handleclick(item : item){
 
-if (item.done) {
-  item.done = false
-  settextDecoration("none")
-}else{
-  item.done = true
-  settextDecoration("line-through")
-}
+    setTodos(todos.map(e => e.name === item.name?  {...todos , name: e.name , done:!e.done} :e ))
+
+    
+  !item.done ? settextDecoration("line-through") : settextDecoration("none")
+
 console.log(item)
 
 console.log(todos)
@@ -46,7 +50,7 @@ console.log(todos)
 
   return (
     <>
-      <li key={item}>
+      <li key={item.name}>
         <div style={list}>
           <span style={{ textDecoration: textDecoration }} onClick={e=>handleclick(item)}>{item.name}</span>
           <button onClick={(e) => handleDelete(item)}>X</button>
@@ -55,3 +59,6 @@ console.log(todos)
     </>
   );
 }
+
+
+///TODO rewatch the video because the shitty code is shitty and doesnt align with react's best practices

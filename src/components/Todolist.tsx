@@ -1,3 +1,4 @@
+import { number } from "../../../../../.cache/deno/npm/registry.npmjs.org/@types/prop-types/15.7.13/index.d.ts";
 import Todoitem from "./Todoitem.tsx";
 
 const style = {
@@ -19,13 +20,15 @@ type props = {
 };
 
 export default function Todolist({ todos, setTodos }: props) {
+   const sorted = todos.slice().sort((a,b) => Number(b.done) - Number(a.done))
+
   return (
     <div style={style}>
-      <ul>
-        {todos.map((e: any, i: number) => (
+      <div>
+        {sorted.map((e: any, i: number) => (
           <Todoitem item={e} key={i} todos={todos} setTodos={setTodos} />
         ))}
-      </ul>
+      </div>
     </div>
   );
 }

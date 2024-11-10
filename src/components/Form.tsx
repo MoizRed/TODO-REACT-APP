@@ -36,7 +36,7 @@ const styles = {
   },
 };
 type props = {
-  todos: string[];
+  todos: {name: string; done: boolean}[]
   setTodos: React.Dispatch<React.SetStateAction<string[]>>;
 };
 
@@ -56,13 +56,31 @@ export default function Form({ todos, setTodos }: props) {
   function handlechange(e: FormEvent) {
     e.preventDefault();
 
+    //handle duplication  
+    if (todos.some(e => e.name === todo.name)) {
+      console.log("duplicate item");
+      setwarn("Duplicate item")
+      return
+    }
+    //handle empty fields
     if (todo.name === "") {
       setwarn("Please enter a todo");
       return; //stops the rest of the code lol because it returns
     } else setwarn("");
+
+
+
+    //add the todo to the list
     setTodo({ name: "", done: false });
     setTodos([...todos, todo]);
+
+
+
+
+   
   }
+
+
 
   return (
     <form style={styles.todoform}>
