@@ -1,6 +1,7 @@
 import { number } from "../../../../../.cache/deno/npm/registry.npmjs.org/@types/prop-types/15.7.13/index.d.ts";
 import Todoitem from "./Todoitem.tsx";
 
+
 const style = {
   listStyle: "none",
   padding: 0,
@@ -15,8 +16,10 @@ const style = {
 };
 
 type props = {
-  todos: string[];
-  setTodos: React.Dispatch<React.SetStateAction<string[]>>;
+  todos: { name: string; done: boolean }[];
+  setTodos: React.Dispatch<React.SetStateAction<{ name: string; done: boolean }[]>>;
+ 
+  
 };
 
 export default function Todolist({ todos, setTodos }: props) {
